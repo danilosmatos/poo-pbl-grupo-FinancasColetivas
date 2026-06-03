@@ -1,0 +1,34 @@
+-------------------------------------------------------------------------------
+Test set: valueobjects.DinheiroTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.007 s <<< FAILURE! -- in valueobjects.DinheiroTest
+valueobjects.DinheiroTest.deveCriarDinheiroComValorValido -- Time elapsed: 0.001 s <<< ERROR!
+java.lang.Error: 
+Unresolved compilation problems: 
+	The declared package "domain.valueobjects" does not match the expected package "valueobjects"
+	Dinheiro cannot be resolved to a type
+	Dinheiro cannot be resolved to a type
+	Dinheiro cannot be resolved to a type
+
+	at valueobjects.DinheiroTest.<init>(Dinheirotest.java:1)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
+valueobjects.DinheiroTest.naoDeveCriarDinheiroComValorNegativo -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.Error: 
+Unresolved compilation problems: 
+	The declared package "domain.valueobjects" does not match the expected package "valueobjects"
+	Dinheiro cannot be resolved to a type
+	Dinheiro cannot be resolved to a type
+	Dinheiro cannot be resolved to a type
+
+	at valueobjects.DinheiroTest.<init>(Dinheirotest.java:1)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:481)
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+
