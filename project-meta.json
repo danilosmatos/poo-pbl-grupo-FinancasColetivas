@@ -3,10 +3,19 @@
   "disciplina": "Projeto da Programação",
   "tema_escolhido": "10",
   "linguagem": "Java",
-  "gerenciador_dependencias": "",
+  "gerenciador_dependencias": "Maven, JUnit 5",
   "integrantes": [
-    {"nome": "Antônio Gabriel", "Anton-Gabriel-code": "user1"},
-    {"nome": "Danilo Soares", "danilosmatos": "user2"},
-    {"nome": "Eudes Oliveira", "eudesolv": "user2"}
+    {
+      "nome": "Antônio Gabriel",
+      "github_username": "Anton-Gabriel-code"
+    },
+    {
+      "nome": "Danilo Soares",
+      "github_username": "danilosmatos"
+    },
+    {
+      "nome": "Eudes Oliveira",
+      "github_username": "eudesolv"
+    }
   ]
 }
