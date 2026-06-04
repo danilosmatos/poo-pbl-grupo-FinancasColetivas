@@ -25,7 +25,7 @@ public class Individuo {
         return saldo;
     }
 
-    public void ExibirInfo() {
+    public void exibirInfo() {
 
         double valorEmReais = saldo.getCentavos() / 100.0;
         System.out.println("Nome:" + nome + " | ID:" + id + " | Saldo: R$" + valorEmReais);
