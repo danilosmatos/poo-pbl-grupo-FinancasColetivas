@@ -3,7 +3,7 @@
   "disciplina": "Projeto da Programação",
   "tema_escolhido": "10",
   "linguagem": "Java",
-  "gerenciador_dependencias": "Maven, JUnit 5",
+  "gerenciador_dependencias": "Maven",
   "integrantes": [
     {
       "nome": "Antônio Gabriel",

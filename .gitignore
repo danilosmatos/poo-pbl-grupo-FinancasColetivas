@@ -1,4 +1,4 @@
 target/
 *.class
 .vscode/
-.log
+*.log
