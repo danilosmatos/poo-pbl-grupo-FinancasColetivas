@@ -1,4 +1,4 @@
-﻿name: Java CI com Maven
+name: Java CI com Maven
 
 on:
   push:
@@ -27,8 +27,5 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Dar permissao ao Maven Wrapper
-        run: chmod +x mvnw
-
       - name: Rodar testes
-        run: ./mvnw clean test
+        run: mvn clean test
