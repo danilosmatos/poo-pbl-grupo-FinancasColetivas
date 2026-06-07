@@ -61,7 +61,7 @@ class GrupoFinanceiroTest {
         assertEquals(MetodoPagamento.PIX, pagamento.getMetodo());
         assertEquals(1, grupo.getDividas().size());
         assertEquals(0, buscarDividaPendente(bob, alice));
-        assertEquals(8000, alice.getSaldo().getCentavos());
+        assertEquals(13000, alice.getSaldo().getCentavos());
         assertEquals(2000, bob.getSaldo().getCentavos());
     }
 
@@ -106,8 +106,9 @@ class GrupoFinanceiroTest {
         grupo.registrarDespesa("Almoco", new Dinheiro(3000), alice);
         grupo.registrarDespesa("Cafe", new Dinheiro(3000), alice);
 
-        assertEquals(1, grupo.getDividas().size());
-        assertEquals(4000, buscarDividaPendente(bob, alice));
+        assertEquals(2, grupo.getDividas().size());
+        assertEquals(2000, buscarDividaPendente(bob, alice));
+        assertEquals(2000, buscarDividaPendente(carlos, alice));
     }
 
     @Test
@@ -130,6 +131,63 @@ class GrupoFinanceiroTest {
         assertEquals(0, grupo.obterSaldoLiquidoCentavos(alice));
         assertEquals(0, grupo.obterSaldoLiquidoCentavos(bob));
         assertEquals(0, grupo.obterSaldoLiquidoCentavos(carlos));
+    }
+
+    @Test
+    void deveManterDividasSeparadasParaDevedoresDiferentes() {
+        grupo.registrarDespesa("Mercado", new Dinheiro(9000), alice);
+
+        assertEquals(2, grupo.getDividas().size());
+        assertEquals(3000, buscarDividaPendente(bob, alice));
+        assertEquals(3000, buscarDividaPendente(carlos, alice));
+    }
+
+    @Test
+    void deveCreditarCredorEDebitarDevedorAoRegistrarPagamento() {
+        grupo.registrarDespesa("Jantar", new Dinheiro(9000), alice);
+
+        grupo.registrarPagamento(bob, alice, new Dinheiro(3000), MetodoPagamento.PIX);
+
+        assertEquals(13000, alice.getSaldo().getCentavos());
+        assertEquals(2000, bob.getSaldo().getCentavos());
+    }
+
+    @Test
+    void naoDeveRegistrarDespesaComPagadorForaDoGrupo() {
+        Individuo externo = new Individuo(99, "Externo", new Dinheiro(1000));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> grupo.registrarDespesa("Compra externa", new Dinheiro(3000), externo));
+    }
+
+    @Test
+    void naoDeveRegistrarDespesaComBeneficiarioForaDoGrupo() {
+        Individuo externo = new Individuo(99, "Externo", new Dinheiro(1000));
+        List<Dividendo> dividendos = List.of(
+                new Dividendo(alice, new Dinheiro(2000)),
+                new Dividendo(externo, new Dinheiro(1000)));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> grupo.registrarDespesaComDividendos("Compra invalida", new Dinheiro(3000), alice, dividendos));
+    }
+
+    @Test
+    void naoDeveRegistrarDespesaComSomaDeDividendosDiferenteDoTotal() {
+        List<Dividendo> dividendos = List.of(
+                new Dividendo(alice, new Dinheiro(1000)),
+                new Dividendo(bob, new Dinheiro(1000)));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> grupo.registrarDespesaComDividendos("Conta invalida", new Dinheiro(3000), alice, dividendos));
+    }
+
+    @Test
+    void naoDeveRegistrarPagamentoComGrupoFechado() {
+        grupo.registrarDespesa("Jantar", new Dinheiro(9000), alice);
+        grupo.fecharGrupo();
+
+        assertThrows(IllegalStateException.class,
+                () -> grupo.registrarPagamento(bob, alice, new Dinheiro(3000), MetodoPagamento.PIX));
     }
 
     private long somaDividendos(Despesa despesa) {
