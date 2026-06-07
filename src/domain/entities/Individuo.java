@@ -25,6 +25,23 @@ public class Individuo {
         return saldo;
     }
 
+    public void creditar(Dinheiro valor) {
+        if (valor == null || valor.ehZero()) {
+            throw new IllegalArgumentException("O valor a creditar deve ser maior que zero.");
+        }
+        saldo = saldo.somar(valor);
+    }
+
+    public void debitar(Dinheiro valor) {
+        if (valor == null || valor.ehZero()) {
+            throw new IllegalArgumentException("O valor a debitar deve ser maior que zero.");
+        }
+        if (!saldo.maiorOuIgual(valor)) {
+            throw new IllegalArgumentException("Saldo insuficiente para debitar o valor informado.");
+        }
+        saldo = saldo.subtrair(valor);
+    }
+
     public void exibirInfo() {
 
         double valorEmReais = saldo.getCentavos() / 100.0;
